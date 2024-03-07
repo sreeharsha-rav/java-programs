@@ -1,0 +1,40 @@
+/target/
+
+# Compiled bytecode files
+*.class
+
+# Build output directories
+bin/
+
+# IDE-specific files
+.idea/
+.vscode/
+
+# Eclipse files
+.settings/
+.project
+.classpath
+
+# Dependency management files
+# For Maven:
+target/
+# For Gradle:
+build/
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+
+# Configuration files containing sensitive information
+config.properties
+
+# Operating system-specific files
+.DS_Store
+Thumbs.db

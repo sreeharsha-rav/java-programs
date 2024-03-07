@@ -8,7 +8,7 @@ Before running the code, make sure you have the following:
 
 - Java Development Kit (JDK) installed
 - MySQL database server installed and running
-- MySQL Connector/J library added to your project
+- MySQL Connector-Java library added to your project
 
 ## Getting Started
 
