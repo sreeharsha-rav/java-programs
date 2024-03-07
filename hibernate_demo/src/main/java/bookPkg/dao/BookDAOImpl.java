@@ -76,11 +76,11 @@ public class BookDAOImpl implements BookDAO {
 	public void updateBook(int bookId, String bookTitle, float bookPrice) {
 		try {
 			// Use a session to get the book
-			Session session1 = HibernateUtil.buildSessionFactory().openSession();
-			session1.beginTransaction();
-			Book book = session1.get(Book.class, bookId);
-			session1.getTransaction().commit();
-			session1.close();
+			Session session = HibernateUtil.buildSessionFactory().openSession();
+			Transaction tx1 = session.getTransaction();
+			tx1.begin();
+			Book book = session.get(Book.class, bookId);
+			tx1.commit();
 			// Check if the book exists
 			if (book == null) {
                 System.out.println("Book not found!");
@@ -90,13 +90,13 @@ public class BookDAOImpl implements BookDAO {
             	book.setBookTitle(bookTitle);
             	book.setBookPrice(bookPrice);
                 // Use a session to update the book
-                Session session2 = HibernateUtil.buildSessionFactory().openSession();
-                session2.beginTransaction();
-                session2.merge(book);
+                Transaction tx2 = session.getTransaction();
+				tx2.begin();
+                session.merge(book);
                 System.out.println(book);
                 System.out.println("Book updated successfully!");
-                session2.getTransaction().commit();
-                session2.close();
+                tx2.commit();
+                session.close();
             }
 		} catch (Exception e) {
 			e.printStackTrace();

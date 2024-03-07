@@ -36,13 +36,15 @@ Before running the code, make sure you have the following:
 ### Employee CRUD - empPkg
 
 - Uses annotation based mapping. Please refer to `Employee.java` file under `empPkg.entity` for mapping details.
+- Also demonstrates usage of embeddable class for address in `Address.java` file under `empPkg.entity`.
 - Files:
   - `Employee.java` - Entity class in `empPkg.entity`
+  - `Address.java` - Embeddable class in `empPkg.entity`
   - `EmployeeDao.java` - Data access object in `empPkg.dao`
   - `EmployeeDaoImpl.java` - Data access object implementation in `empPkg.dao`
   - `App.java` - Main class in `empPkg.client`
 - Functions:
-  - Create a new employee
+  - Create a new employee with address
   - Retrieve an employee by ID
   - Update an employee's details
   - Delete an employee

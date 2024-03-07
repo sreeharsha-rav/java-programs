@@ -3,6 +3,7 @@ package empPkg.client;
 import java.util.Scanner;
 import empPkg.dao.EmployeeDAO;
 import empPkg.dao.EmployeeDAOImpl;
+import empPkg.entity.Address;
 
 // A simple console-based application to perform CRUD operations on Employee entity
 public class App {
@@ -12,6 +13,10 @@ public class App {
 		int id;
 		String name;
 		float sal;
+		String street;
+		String city;
+		String state;
+		String zip;
 		
 		// Menu-driven code
 		while (true) {
@@ -36,7 +41,18 @@ public class App {
 				System.out.print("Enter employee salary: ");
 				sal = sc.nextFloat();
 				sc.nextLine();
-				emp.createEmployee(name, sal);
+				System.out.println("Enter employee address... ");
+				System.out.print("Enter street: ");
+				street = sc.nextLine();
+				System.out.print("Enter city: ");
+				city = sc.nextLine();
+				System.out.print("Enter state: ");
+				state = sc.nextLine();
+				System.out.print("Enter zip: ");
+				zip = sc.nextLine();
+				Address address = new Address(street, city, state, zip);
+				emp.createEmployee(name, sal, address);
+				
 				System.out.println();
 				break;
 			case 2:
@@ -65,7 +81,17 @@ public class App {
 				System.out.print("Enter new employee salary: ");
 				sal = sc.nextFloat();
 				sc.nextLine();
-				emp.updateEmployee(id, name, sal);
+				System.out.println("Enter new employee address... ");
+				System.out.print("Enter street: ");
+				street = sc.nextLine();
+				System.out.print("Enter city: ");
+				city = sc.nextLine();
+				System.out.print("Enter state: ");
+				state = sc.nextLine();
+				System.out.print("Enter zip: ");
+				zip = sc.nextLine();
+				Address newAddress = new Address(street, city, state, zip);
+				emp.updateEmployee(id, name, sal, newAddress);
 				System.out.println();
 				break;
 			case 5:

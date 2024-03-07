@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Embedded;
 
 @Entity
 @Table(name = "employees")
@@ -18,15 +19,18 @@ public class Employee { // Employee POJO class entity
 	private String empName;
 	@Column(name = "emp_sal")
 	private float empSal;
+	@Embedded
+	private Address address;
 	
 	// Default constructor
 	public Employee() {
 	}
 	
 	// Parameterized constructor
-	public Employee(String empName, float empSal) {
+	public Employee(String empName, float empSal, Address address) {
 		this.empName = empName;
 		this.empSal = empSal;
+		this.address = address;
 	}
 	
 	// Getters and setters
@@ -54,9 +58,18 @@ public class Employee { // Employee POJO class entity
 		this.empSal = empSal;
 	}
 	
+	public Address getAddress() {
+		return address;
+	}
+	
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	
 	// toString method
 	@Override
 	public String toString() {
-		return "Employee [empId=" + empId + ", empName=" + empName + ", empSal=" + empSal + "]";
+		return "Employee [empId=" + empId + ", empName=" + empName + ", empSal=" + empSal + ", address=" + address
+				+ "]";
 	}
 }

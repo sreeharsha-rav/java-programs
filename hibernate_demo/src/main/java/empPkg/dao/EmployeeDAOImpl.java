@@ -3,125 +3,142 @@ package empPkg.dao;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import empPkg.entity.Employee;
+import empPkg.entity.Address;
 import util.HibernateUtil;
 import java.util.ArrayList;
+
 
 // A simple Data Access Object (DAO) implementation for Employee entity
 public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
-	public void createEmployee(String empName, float empSal) {
+	public void createEmployee(String empName, float empSal, Address address) {
 		try {
-			// Initialize the session and transaction
+			// Create an Employee object
+			Employee emp = new Employee(empName, empSal, address);
+			// Initialize Session and Transaction objects
 			Session session = HibernateUtil.buildSessionFactory().openSession();
 			Transaction tx = session.getTransaction();
 			tx.begin();
-			// Create a new employee
-			Employee employee = new Employee(empName, empSal);
-			session.persist(employee);
-			System.out.println(employee);
-			System.out.println("Employee created successfully!");
+			// Save the Employee object
+			session.persist(emp);
 			tx.commit();
+			// Close the Session
 			session.close();
 		} catch (Exception e) {
-            e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public void readEmployee(int empId) {
 		try {
-			// Initialize the session and transaction
+			// Initialize Session object
 			Session session = HibernateUtil.buildSessionFactory().openSession();
-			Transaction tx = session.getTransaction();
-			tx.begin();
-			Employee employee = session.get(Employee.class, empId);
-			// Check if the employee exists
-			if (employee == null) {
-				System.out.println("Employee not found!");
+			// Read an Employee object
+			Employee emp = session.get(Employee.class, empId);
+			// check if the Employee object exists
+			if (emp == null) {
+				System.out.println("Employee with ID " + empId + " does not exist");
 			} else {
-				System.out.println("Employee found!");
-				System.out.println(employee);
-				System.out.println("Employee read successfully!");
+				// Display the Employee object
+				System.out.println("Employee ID: " + emp.getEmpId());
+				System.out.println("Employee Name: " + emp.getEmpName());
+				System.out.println("Employee Salary: " + emp.getEmpSal());
+				System.out
+						.println("Employee Address: " + emp.getAddress().getStreet() + ", " + emp.getAddress().getCity()
+								+ ", " + emp.getAddress().getState() + ", " + emp.getAddress().getZip());
 			}
-			tx.commit();
+			// Close the Session
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public void readAllEmployees() {
 		try {
-			// Initialize the session and transaction
+			// Initialize Session object
 			Session session = HibernateUtil.buildSessionFactory().openSession();
-			ArrayList<Employee> employees = (ArrayList<Employee>) session.createQuery("from Employee", Employee.class).list();
-			// Check if there are any employees
+			// Read all Employee objects
+			ArrayList<Employee> employees = (ArrayList<Employee>) session.createQuery("FROM Employee", Employee.class).getResultList();
+			// check if the Employee objects exist
 			if (employees.isEmpty()) {
-				System.out.println("No employees found!");
+				System.out.println("No Employee records found");
 			} else {
-				System.out.println("Employees found!");
-				for (Employee employee : employees) {
-					System.out.println(employee);
+				// Display the Employee objects
+				for (Employee emp : employees) {
+					System.out.println("Employee ID: " + emp.getEmpId());
+					System.out.println("Employee Name: " + emp.getEmpName());
+					System.out.println("Employee Salary: " + emp.getEmpSal());
+					System.out.println(
+							"Employee Address: " + emp.getAddress().getStreet() + ", " + emp.getAddress().getCity()
+									+ ", " + emp.getAddress().getState() + ", " + emp.getAddress().getZip());
+					System.out.println();
 				}
-				System.out.println("Employees read successfully!");
 			}
+			// Close the Session
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
-	public void updateEmployee(int empId, String empName, float empSal) {
+	public void updateEmployee(int empId, String empName, float empSal, Address address) {
 		try {
-			// Use a session to get the employee
+			// Initialize Session and Transaction objects
 			Session session = HibernateUtil.buildSessionFactory().openSession();
-			Transaction tx = session.getTransaction();
-			tx.begin();
-			Employee employee = session.get(Employee.class, empId);
-			tx.commit();
-			session.close();
-			// Check if the employee exists
-			if (employee == null) {
-				System.out.println("Employee not found!");
+			Transaction tx1 = session.getTransaction();
+			tx1.begin();
+			// Read an Employee object
+			Employee emp = session.get(Employee.class, empId);
+			tx1.commit();
+			// check if the Employee object exists
+			if (emp == null) {
+				System.out.println("Employee with ID " + empId + " does not exist");
 			} else {
-				// Use a session to update the employee
-				session = HibernateUtil.buildSessionFactory().openSession();
-				tx = session.getTransaction();
-				tx.begin();
-				// Update the employee
-				employee.setEmpName(empName);
-				employee.setEmpSal(empSal);
-				session.merge(employee);
-				System.out.println(employee);
-				System.out.println("Employee updated successfully!");
-				tx.commit();
-				session.close();
+				// Initialize Transaction object
+				Transaction tx2 = session.getTransaction();
+				tx2.begin();
+				// Update the Employee object
+				emp.setEmpName(empName);
+				emp.setEmpSal(empSal);
+				emp.setAddress(address);
+				session.merge(emp);
+				tx2.commit();
+				System.out.println("Employee with ID " + empId + " updated successfully");
 			}
+			// Close the Session
+			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public void deleteEmployee(int empId) {
 		try {
-			// Initialize the session and transaction
+			// Initialize Session and Transaction objects
 			Session session = HibernateUtil.buildSessionFactory().openSession();
-			Transaction tx = session.getTransaction();
-			tx.begin();
-			Employee employee = session.get(Employee.class, empId);
-			// Check if the employee exists
-			if (employee == null) {
-				System.out.println("Employee not found!");
+			Transaction tx1 = session.getTransaction();
+			tx1.begin();
+			// Read an Employee object
+			Employee emp = session.get(Employee.class, empId);
+			tx1.commit();
+			// check if the Employee object exists
+			if (emp == null) {
+				System.out.println("Employee with ID " + empId + " does not exist");
 			} else {
-				// Delete the employee
-				session.remove(employee);
-				System.out.println(employee);
-				System.out.println("Employee deleted successfully!");
+				// Initialize Transaction object
+				Transaction tx2 = session.getTransaction();
+				tx2.begin();
+				// Delete the Employee object
+				session.remove(emp);
+				tx2.commit();
+				System.out.println("Employee with ID " + empId + " deleted successfully");
 			}
-			tx.commit();
+			// Close the Session
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
