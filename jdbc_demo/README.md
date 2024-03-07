@@ -1,6 +1,6 @@
 # JDBC Demo
 
-This repository contains a demonstration of JDBC functionality in Java. It includes implementations for CRUD operations on two entities: Book and Employee.
+This project demonstrates the functionality of JDBC in Java. It includes implementations for CRUD operations on two entities: Book and Employee.
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ Before running the code, make sure you have the following:
 
 ## Getting Started
 
-1. Clone this repository to your local machine.
+1. Clone this repository to your local machine. Go to the project directory.
 2. Open the project in your favorite Java IDE.
 3. Update the database connection details in the `MyConnection.Java` file.
 4. Run the `Main.java` file to execute the demo.
