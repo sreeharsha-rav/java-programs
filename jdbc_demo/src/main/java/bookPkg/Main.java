@@ -79,6 +79,7 @@ public class Main {
 			case 6:
 				System.out.println();
 				System.out.println("Exiting...");
+				sc.close();
 				System.exit(0);
 				break;
 			default:
