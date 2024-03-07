@@ -6,6 +6,7 @@ import bookPkg.entity.Book;
 import util.HibernateUtil;
 import java.util.ArrayList;
 
+// A Data Access Object (DAO) implementation for the book table
 public class BookDAOImpl implements BookDAO {
 	@Override
 	public void createBook(String bookTitle, float bookPrice) {

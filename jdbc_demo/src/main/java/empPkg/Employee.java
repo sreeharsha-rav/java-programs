@@ -1,6 +1,6 @@
 package empPkg;
 
-// Employee class
+// Employee POJO class
 public class Employee {
 	int empId;
 	String empName;

@@ -2,6 +2,7 @@ package bookPkg;
 
 import java.util.Scanner;
 
+// A simple CRUD application for the book table
 public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

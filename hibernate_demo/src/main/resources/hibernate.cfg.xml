@@ -23,6 +23,7 @@
 		<mapping resource="bookPkg/entity/Book.hbm.xml"/>
 		
 		<!--  Use Annotation-based mapping metadata -->
+		<mapping class="empPkg.entity.Employee"/>
 		
 	</session-factory>
 </hibernate-configuration>

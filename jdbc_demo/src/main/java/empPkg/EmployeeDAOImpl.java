@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+// Employee Data Access Object implementation
 public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
 	public void insertEmployee(Employee emp){

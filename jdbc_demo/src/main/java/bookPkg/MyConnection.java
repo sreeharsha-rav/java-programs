@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+// A class to establish a connection to the database through JDBC
 public class MyConnection {
 	static Connection conn;
 	

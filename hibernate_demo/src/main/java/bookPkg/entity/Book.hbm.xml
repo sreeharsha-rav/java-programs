@@ -3,6 +3,7 @@
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
+<!-- XML Based Hibernate Mapping for Book -->
 <hibernate-mapping>
 	<class name="bookPkg.entity.Book" table="books">
 		<id name="bookId" type="int">

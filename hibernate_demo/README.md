@@ -13,7 +13,7 @@ Before running the code, make sure you have the following:
 
 1. Clone this repository to your local machine. Go to the project directory.
 2. Open the project in your favorite Java IDE.
-3. Update the database connection details in the `hibernate.cfg.xml` file.
+3. Update the database connection details  and provide mapping configuration in the `hibernate.cfg.xml` file.
 4. Run the `App.java` file to execute the demo in relevant package.
 
 ## Functionality
@@ -35,7 +35,12 @@ Before running the code, make sure you have the following:
 
 ### Employee CRUD - empPkg
 
--
+- Uses annotation based mapping. Please refer to `Employee.java` file under `empPkg.entity` for mapping details.
+- Files:
+  - `Employee.java` - Entity class in `empPkg.entity`
+  - `EmployeeDao.java` - Data access object in `empPkg.dao`
+  - `EmployeeDaoImpl.java` - Data access object implementation in `empPkg.dao`
+  - `App.java` - Main class in `empPkg.client`
 - Functions:
   - Create a new employee
   - Retrieve an employee by ID
@@ -85,8 +90,7 @@ To use the JDBC functionality in your own project, follow these steps:
     ```
 2. Copy the `hibernate.cfg.xml` file to your project.
 3. Update the database connection details in the `hibernate.cfg.xml` file.
-4.
-
+4. Implement the necessary CRUD operations for your entity.
 
 ## License
 

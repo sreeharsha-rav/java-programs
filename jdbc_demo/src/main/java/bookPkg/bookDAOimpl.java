@@ -4,9 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+// A Data Access Object (DAO) implementation for the book table
 public class bookDAOimpl implements bookDAO {
 	@Override
-	public void create(int bookId, String bookTitle, double bookPrice) {
+	public void create(int bookId, String bookTitle, double bookPrice) {	// Create a book
 		String query = "INSERT INTO books VALUES (?, ?, ?)";
 		try (Connection conn = MyConnection.getConnection()) {
 			PreparedStatement prepStmt = conn.prepareStatement(query);
@@ -22,7 +23,7 @@ public class bookDAOimpl implements bookDAO {
 	}
 
 	@Override
-	public void read(int bookId) {
+	public void read(int bookId) { // Read a book
 		String query = "SELECT * FROM books WHERE book_id = ?";
 		try (Connection conn = MyConnection.getConnection()) {
 			PreparedStatement prepStmt = conn.prepareStatement(query);
@@ -45,7 +46,7 @@ public class bookDAOimpl implements bookDAO {
 	}
 
 	@Override
-	public void readAll() {
+	public void readAll() { // Read all books
 		String query = "SELECT * FROM books";
 		try (Connection conn = MyConnection.getConnection()) {
 			PreparedStatement prepStmt = conn.prepareStatement(query);
@@ -66,7 +67,7 @@ public class bookDAOimpl implements bookDAO {
 	}
 
 	@Override
-	public void update(int bookId, String bookTitle, double bookPrice) {
+	public void update(int bookId, String bookTitle, double bookPrice) { // Update a book
 		String query = "UPDATE books SET book_title = ?, book_price = ? WHERE book_id = ?";
 		try (Connection conn = MyConnection.getConnection()) {
 			PreparedStatement prepStmt = conn.prepareStatement(query);
@@ -87,7 +88,7 @@ public class bookDAOimpl implements bookDAO {
 	}
 
 	@Override
-	public void delete(int bookId) {
+	public void delete(int bookId) { // Delete a book
 		String query = "DELETE FROM books WHERE book_id = ?";
 		try (Connection conn = MyConnection.getConnection()) {
 			PreparedStatement prepStmt = conn.prepareStatement(query);
