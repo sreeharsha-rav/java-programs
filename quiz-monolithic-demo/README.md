@@ -23,7 +23,7 @@ Before running the code, make sure you have the following:
 3. Run the `QuizApplication.java` file to start the application.
 4. Access the application at `http://localhost:8080`.
 5. Use Postman or any other API testing tool to test the endpoints.
-    - Refer to the API documentation [here](quiz-monolithic-demo/Quiz-Monolithic.postman_collection.json).
+    - Refer to the API documentation [here](Quiz-Monolithic.postman_collection.json).
 
 ## Functionality
 

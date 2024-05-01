@@ -31,7 +31,7 @@ Before running the code, make sure you have the following:
     - `ApiGatewayApplication.java` (API Gateway) [Port: 8100]
 4. Access the API Gateway at `http://localhost:8100`.
 5. Use Postman or any other API testing tool to test the endpoints.
-    - Refer to the API documentation [here].(quiz-microservice-demo/Quiz microservices.postman_collection.json).
+    - Refer to the API documentation [here](Quiz microservices.postman_collection.json).
 
 ## Functionality
 
