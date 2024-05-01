@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "c795610a-e24d-4bc7-9091-95d872da2e11",
+		"name": "Quiz-Monolithic",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28103794"
+	},
+	"item": [
+		{
+			"name": "get all questions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/questions"
+			},
+			"response": []
+		},
+		{
+			"name": "get question by category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/questions/category/Math"
+			},
+			"response": []
+		},
+		{
+			"name": "Add a question",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"category\": \"Math\",\r\n    \"difficulty\": \"MEDIUM\",\r\n    \"option1\": \"(3, 4, 5)\",\r\n    \"option2\": \"(2, 3, 4)\",\r\n    \"option3\": \"(5, 6, 7)\",\r\n    \"option4\": \"(1, 2, 3)\",\r\n    \"questionTitle\": \"Which of the following is a valid Pythagorean Triplet?\",\r\n    \"correctOption\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/questions"
+			},
+			"response": []
+		},
+		{
+			"name": "Create new quiz",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quizTitle\": \"Introductory Math Quiz\",\r\n    \"questionCount\": 3,\r\n    \"category\": \"Math\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/quiz/create"
+			},
+			"response": []
+		},
+		{
+			"name": "get quiz by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/quiz/1"
+			},
+			"response": []
+		},
+		{
+			"name": "submit quiz answers",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"questionId\": 2,\r\n        \"selectedOption\": 2\r\n    },\r\n    {\r\n        \"questionId\": 6,\r\n        \"selectedOption\": 1\r\n    },\r\n    {\r\n        \"questionId\": 10,\r\n        \"selectedOption\": 2\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/quiz/1/submit"
+			},
+			"response": []
+		}
+	]
+}

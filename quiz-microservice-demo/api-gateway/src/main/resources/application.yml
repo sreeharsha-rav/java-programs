@@ -1,0 +1,23 @@
+spring:
+    application:
+        name: api-gateway
+    cloud:
+        eureka:
+            client:
+                serviceUrl:
+                    defaultZone: http://localhost:8761/eureka
+                registerWithEureka: true
+                fetchRegistry: true
+        gateway:
+            routes:
+                -   id: question-service
+                    uri: lb://question-service
+                    predicates:
+                        - Path=/questions/**
+                -   id: quiz-service
+                    uri: lb://quiz-service
+                    predicates:
+                        - Path=/quiz/**
+
+server:
+    port: 8100

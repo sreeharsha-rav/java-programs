@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "20a442b1-c275-4f81-9926-9e5ef1cf278f",
+		"name": "Quiz microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28103794"
+	},
+	"item": [
+		{
+			"name": "get all questions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8010/questions"
+			},
+			"response": []
+		},
+		{
+			"name": "get questions by category",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8010/questions/category/Math"
+			},
+			"response": []
+		},
+		{
+			"name": "Add question",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"category\": \"Math\",\r\n  \"difficulty\": \"EASY\",\r\n  \"option1\": \"1\",\r\n  \"option2\": \"2\",\r\n  \"option3\": \"3\",\r\n  \"option4\": \"4\",\r\n  \"questionTitle\": \"What is 1+1?\",\r\n  \"correctOption\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8010/questions"
+			},
+			"response": []
+		},
+		{
+			"name": "generate questions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8010/questions/generate?numQuestions=3&category=Math",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8010",
+					"path": [
+						"questions",
+						"generate"
+					],
+					"query": [
+						{
+							"key": "numQuestions",
+							"value": "3"
+						},
+						{
+							"key": "category",
+							"value": "Math"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get question by ids",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    6,\r\n    10,\r\n    2\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8010/questions/getByIds"
+			},
+			"response": []
+		},
+		{
+			"name": "create quiz",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quizTitle\": \"Introductory Math Quiz\",\r\n    \"questionCount\": 3,\r\n    \"category\": \"Math\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8020/quiz/create"
+			},
+			"response": []
+		},
+		{
+			"name": "get quiz",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8020/quiz/1"
+			},
+			"response": []
+		},
+		{
+			"name": "submit quiz",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"questionId\": 2,\r\n        \"selectedOption\": 1\r\n    },\r\n    {\r\n        \"questionId\": 6,\r\n        \"selectedOption\": 1\r\n    },\r\n    {\r\n        \"questionId\": 10,\r\n        \"selectedOption\": 1\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8020/quiz/1/submit"
+			},
+			"response": []
+		},
+		{
+			"name": "get quiz through api-gateway",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8100/quiz/1"
+			},
+			"response": []
+		},
+		{
+			"name": "get questions through api gateway",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8100/questions"
+			},
+			"response": []
+		}
+	]
+}
