@@ -14,6 +14,7 @@ Before running the code, make sure you have the following:
     - Reactive Gateway
     - Eureka Discovery Client
     - Eureka Server
+    - OpenFeign
     - Lombok
 - Maven installed
 - MySQL installed
@@ -31,7 +32,7 @@ Before running the code, make sure you have the following:
     - `ApiGatewayApplication.java` (API Gateway) [Port: 8100]
 4. Access the API Gateway at `http://localhost:8100`.
 5. Use Postman or any other API testing tool to test the endpoints.
-    - Refer to the API documentation [here](Quiz microservices.postman_collection.json).
+    - Refer to the API documentation [here](Quiz-microservices.postman_collection.json).
 
 ## Functionality
 
@@ -53,3 +54,11 @@ The Quiz app exposes the following API endpoints:
 - `POST /quiz/create`: Create a new quiz.
 - `POST /quiz/{id}/submit`: Submit a quiz.
 - `GET /quiz/{id}`: Get a quiz by ID.
+
+### Database ER Diagram
+
+[Quiz Microservice Database ER Diagram](quiz_db-ERD.png)
+
+### Architecture Diagram
+
+[Quiz Microservice Architecture Diagram](Quiz-microservices.png)

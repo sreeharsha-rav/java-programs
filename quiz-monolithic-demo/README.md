@@ -45,3 +45,7 @@ The Quiz app exposes the following API endpoints:
 - `POST /quiz/create`: Create a new quiz.
 - `POST /quiz/{id}/submit`: Submit a quiz.
 - `GET /quiz/{id}`: Get a quiz by ID.
+
+### Database ER Diagram
+
+[Quiz Microservice Database ER Diagram](quiz_db-ERD.png)
