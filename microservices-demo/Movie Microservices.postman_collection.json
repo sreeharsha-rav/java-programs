@@ -1,0 +1,46 @@
+{
+	"info": {
+		"_postman_id": "a5a4aab6-baf3-4d99-9b0a-7186ca63cd83",
+		"name": "Movie Microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28103794"
+	},
+	"item": [
+		{
+			"name": "get movie catalog for a user ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8000/api/movies/catalog/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Get movie info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8100/api/movies/1"
+			},
+			"response": []
+		},
+		{
+			"name": "get movie rating",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8200/api/movies/ratings/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Get ratings for demo users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8200/api/movies/ratings/users/1"
+			},
+			"response": []
+		}
+	]
+}

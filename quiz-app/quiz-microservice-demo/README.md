@@ -57,8 +57,8 @@ The Quiz app exposes the following API endpoints:
 
 ### Database ER Diagram
 
-[Quiz Microservice Database ER Diagram](quiz_db-ERD.png)
+![Quiz Microservice Database ER Diagram](quiz_db-ERD.png)
 
 ### Architecture Diagram
 
-[Quiz Microservice Architecture Diagram](Quiz-microservices.png)
+![Quiz Microservice Architecture Diagram](Quiz-microservices.png)
