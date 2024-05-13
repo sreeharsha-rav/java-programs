@@ -24,8 +24,8 @@ There is also a gateway service that acts as an entry point to the application.
 
 ## Technologies Used
 
-- Java 17
-- Spring Boot 3.2.4
+- Java 21
+- Spring Boot 3.2.5
 - MongoDB
 - MySQL
 

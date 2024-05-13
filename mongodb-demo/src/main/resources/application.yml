@@ -1,0 +1,6 @@
+spring:
+    application:
+        name: mongodb-spring-boot
+    data:
+        mongodb:
+            uri: 
