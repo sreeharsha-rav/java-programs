@@ -3,4 +3,7 @@ spring:
         name: mongodb-spring-boot
     data:
         mongodb:
-            uri: 
+            database: expense_tracker
+            port: 27017
+            host: localhost
+

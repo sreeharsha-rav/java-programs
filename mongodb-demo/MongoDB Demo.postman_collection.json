@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "617f4ccc-d22b-4026-9784-e82d7564b94a",
+		"name": "MongoDB Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28103794"
+	},
+	"item": [
+		{
+			"name": "Add new expense",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Netflix\",\r\n    \"category\": \"ENTERTAINMENT\",\r\n    \"amount\": 9.99\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/expenses"
+			},
+			"response": []
+		},
+		{
+			"name": "get all expenses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/expenses"
+			},
+			"response": []
+		},
+		{
+			"name": "get expense by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/expenses/search?name=Netflix",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"expenses",
+						"search"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Netflix"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update expense",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Netflix\",\r\n    \"category\": \"ENTERTAINMENT\",\r\n    \"amount\": 11.99\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/expenses/6642bbbfe4212d2c737feb1f"
+			},
+			"response": []
+		},
+		{
+			"name": "delete expense",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/api/expenses/6642bb94e4212d2c737feb1b"
+			},
+			"response": []
+		},
+		{
+			"name": "Get expense by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/expenses/6642bbbfe4212d2c737feb1f"
+			},
+			"response": []
+		}
+	]
+}
