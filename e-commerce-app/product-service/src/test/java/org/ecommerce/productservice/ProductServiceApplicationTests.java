@@ -8,6 +8,7 @@ class ProductServiceApplicationTests {
 
     @Test
     void contextLoads() {
+        // Test if the application context loads successfully
     }
 
 }

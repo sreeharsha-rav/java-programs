@@ -24,11 +24,20 @@ There is also a gateway service that acts as an entry point to the application.
 
 ## Technologies Used
 
-- Java 21
+- Java 17
 - Spring Boot 3.2.5
 - MongoDB
 - MySQL
+- Test Containers
 
 ## How to Run
 
 1. Clone the repository
+2. Setup databases:
+    - Run MongoDB and MySQL using Docker:
+        ```shell
+        docker-compose up
+        ```
+    - Create databases:
+        - MongoDB: `product_db`
+        - MySQL: `ecommerce`
