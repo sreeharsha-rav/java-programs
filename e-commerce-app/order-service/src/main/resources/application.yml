@@ -1,0 +1,14 @@
+spring:
+    application:
+        name: order-service
+    datasource:
+        url: jdbc:mysql://localhost:3306/ecommerce_db
+        username: root
+        password: mango%^TANGO47
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+
+server:
+    port: 8020

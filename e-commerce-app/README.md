@@ -34,10 +34,9 @@ There is also a gateway service that acts as an entry point to the application.
 
 1. Clone the repository
 2. Setup databases:
-    - Run MongoDB and MySQL using Docker:
-        ```shell
-        docker-compose up
-        ```
-    - Create databases:
-        - MongoDB: `product_db`
-        - MySQL: `ecommerce`
+    - MongoDB:
+      - Create a database named `ecommerce_db`, and a collection named `product`
+      - Setup MongoDB connection in `application.yml` file in the `product-service` module
+    - MySQL:
+      - Create a database named `ecommerce_db`
+      - Setup MySQL connection in `application.yml` file in the `order-service` module
