@@ -26,13 +26,13 @@ public class Order {
     @Column(name = "sku_code")
     private String skuCode;
 
-    @Column(name = "order_date", columnDefinition = "TIMESTAMP")
-    private Date orderDate;
-
-    @Column(name = "price", columnDefinition = "DECIMAL(10,2)")
-    private double price;
-
     @Column(name = "quantity")
     private int quantity;
+
+    @Column(name = "price", columnDefinition = "DECIMAL(10,2)") // Limit to 10 digits and 2 decimal points
+    private double price;
+
+    @Column(name = "order_date", columnDefinition = "TIMESTAMP")
+    private Date orderDate;
 
 }

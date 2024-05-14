@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.Optional;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -21,9 +22,9 @@ public class OrderService {
 
     public OrderResponse createOrder(OrderRequest orderRequest) {
         try {
-            // Create order
+            // Map request to order
             Order order = Order.builder()
-                    .orderNumber(orderRequest.orderNumber())
+                    .orderNumber(UUID.randomUUID().toString())
                     .skuCode(orderRequest.skuCode())
                     .orderDate(new Date())
                     .price(orderRequest.price())
