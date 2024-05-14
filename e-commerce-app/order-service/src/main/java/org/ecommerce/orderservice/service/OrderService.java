@@ -3,14 +3,13 @@ package org.ecommerce.orderservice.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.ecommerce.orderservice.dto.OrderRequest;
+import org.ecommerce.orderservice.dto.OrderResponse;
 import org.ecommerce.orderservice.model.Order;
-import org.ecommerce.orderservice.model.OrderItem;
 import org.ecommerce.orderservice.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.List;
 
 @Service
@@ -20,31 +19,29 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
-    public Order createOrder(OrderRequest orderRequest) {
+    public OrderResponse createOrder(OrderRequest orderRequest) {
         try {
-            Order newOrder = new Order();   // Create a new order
+            // Create order
+            Order order = Order.builder()
+                    .orderNumber(orderRequest.orderNumber())
+                    .skuCode(orderRequest.skuCode())
+                    .orderDate(new Date())
+                    .price(orderRequest.price())
+                    .quantity(orderRequest.quantity())
+                    .build();
 
-            // Map order items
-            List<OrderItem> orderItems = orderRequest.getOrderItems().stream()
-                    .map(orderItemRequest -> OrderItem.builder()
-                            .order(newOrder)
-                            .productId(orderItemRequest.getProductId())
-                            .quantity(orderItemRequest.getQuantity())
-                            .price(orderItemRequest.getPrice())
-                            .build())
-                    .collect(Collectors.toList());
+            // Save order
+            Order savedOrder = orderRepository.save(order);
+            log.info("Order created successfully: {}", savedOrder);
 
-            // Set order properties
-            newOrder.setOrderItems(orderItems);
-            newOrder.setOrderDate(new Date());
-            newOrder.setTotalAmount(orderItems.stream().mapToDouble(OrderItem::getPrice).sum());
-
-            // Save the order
-            Order savedOrder = orderRepository.save(newOrder);
-            log.info("Order created successfully: {}", savedOrder.getId());
-
-            // Return the order response
-            return savedOrder;
+            // Return response
+            return new OrderResponse(
+                    savedOrder.getId(),
+                    savedOrder.getOrderNumber(),
+                    savedOrder.getSkuCode(),
+                    savedOrder.getPrice(),
+                    savedOrder.getQuantity(),
+                    savedOrder.getOrderDate().toString());
 
         } catch (Exception e) {
             log.error("Error occurred while creating order: {}", e.getMessage());
@@ -52,12 +49,34 @@ public class OrderService {
         }
     }
 
-    public Order getOrderByID(Long id) {
-        return orderRepository.findById(id).orElse(null);
+    public OrderResponse getOrderByID(Long id) {
+        Optional<Order> orderOptional = orderRepository.findById(id);
+        if (orderOptional.isEmpty()) {
+            log.error("Order not found: {}", id);
+            return null;
+        }
+
+        return new OrderResponse(
+                orderOptional.get().getId(),
+                orderOptional.get().getOrderNumber(),
+                orderOptional.get().getSkuCode(),
+                orderOptional.get().getPrice(),
+                orderOptional.get().getQuantity(),
+                orderOptional.get().getOrderDate().toString());
     }
 
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
+    public List<OrderResponse> getAllOrders() {
+        List<Order> orders = orderRepository.findAll();
+
+        return orders.stream()
+                .map(order -> new OrderResponse(
+                        order.getId(),
+                        order.getOrderNumber(),
+                        order.getSkuCode(),
+                        order.getPrice(),
+                        order.getQuantity(),
+                        order.getOrderDate().toString()))
+                .toList();
     }
 
     public void deleteOrder(Long id) {

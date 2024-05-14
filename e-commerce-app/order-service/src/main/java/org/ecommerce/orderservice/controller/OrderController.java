@@ -2,7 +2,7 @@ package org.ecommerce.orderservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.ecommerce.orderservice.dto.OrderRequest;
-import org.ecommerce.orderservice.model.Order;
+import org.ecommerce.orderservice.dto.OrderResponse;
 import org.ecommerce.orderservice.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,19 +18,19 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Order createOrder(@RequestBody OrderRequest orderRequest) {
+    public OrderResponse createOrder(@RequestBody OrderRequest orderRequest) {
         return orderService.createOrder(orderRequest);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Order getOrderByID(@PathVariable Long id) {
+    public OrderResponse getOrderByID(@PathVariable Long id) {
         return orderService.getOrderByID(id);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Order> getAllOrders() {
+    public List<OrderResponse> getAllOrders() {
         return orderService.getAllOrders();
     }
 

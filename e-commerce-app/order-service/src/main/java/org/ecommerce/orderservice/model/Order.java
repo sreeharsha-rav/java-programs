@@ -1,6 +1,5 @@
 package org.ecommerce.orderservice.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -22,14 +20,19 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
+    @Column(name = "order_number")
+    private String orderNumber;
 
-    @Column(name = "order_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "sku_code")
+    private String skuCode;
+
+    @Column(name = "order_date", columnDefinition = "TIMESTAMP")
     private Date orderDate;
 
-    @Column(name = "total_amount", columnDefinition = "DECIMAL(10,2)")
-    private double totalAmount;
+    @Column(name = "price", columnDefinition = "DECIMAL(10,2)")
+    private double price;
+
+    @Column(name = "quantity")
+    private int quantity;
 
 }

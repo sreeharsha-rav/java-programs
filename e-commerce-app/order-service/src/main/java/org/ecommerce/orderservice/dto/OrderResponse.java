@@ -1,8 +1,10 @@
 package org.ecommerce.orderservice.dto;
 
-public record OrderRequest(
+public record OrderResponse(
+        Long id,
         String orderNumber,
         String skuCode,
         double price,
-        int quantity) {
+        int quantity,
+        String orderDate) {
 }
