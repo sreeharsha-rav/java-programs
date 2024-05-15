@@ -9,8 +9,8 @@ import org.ecommerce.orderservice.model.Order;
 import org.ecommerce.orderservice.model.OrderItem;
 import org.ecommerce.orderservice.repository.OrderRepository;
 import org.springframework.stereotype.Service;
-import org.ecommerce.orderservice.client.InventoryClient;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -24,8 +24,7 @@ import java.util.UUID;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-
-    private final InventoryClient inventoryClient;
+    private final WebClient.Builder webClientBuilder;
 
     public void placeOrder(OrderRequest orderRequest) {
         try {
@@ -45,7 +44,7 @@ public class OrderService {
             List<String> skuCodes = orderItems.stream()
                     .map(OrderItem::getSkuCode)
                     .toList();  // Get all sku codes
-            InventoryResponse[] inventoryResponses = inventoryClient.isInStock(skuCodes);
+            InventoryResponse[] inventoryResponses = checkInventoryisInStock(skuCodes);
             boolean allProductsInStock = Arrays.stream(inventoryResponses)
                     .allMatch(InventoryResponse::getIsInStock);
 
@@ -55,10 +54,12 @@ public class OrderService {
                 log.info("Order created successfully: {}", order.getOrderNumber());
             } else {
                 log.error("Order creation failed. Some products are out of stock.");
+                throw new RuntimeException("Order creation failed. Some products are out of stock.");
             }
 
         } catch (Exception e) {
             log.error("Error occurred while creating order: {}", e.getMessage());
+            throw new RuntimeException("Error occurred while creating order");
         }
     }
 
@@ -70,6 +71,18 @@ public class OrderService {
         orderItem.setQuantity(orderItemDto.getQuantity());
 
         return orderItem;
+    }
+
+    private InventoryResponse[] checkInventoryisInStock(List<String> skuCodes) {
+        return webClientBuilder.build()
+                .get()
+                .uri("http://inventory-service/api/inventory",
+                        uriBuilder -> uriBuilder
+                            .queryParam("skuCodes", skuCodes)
+                            .build())
+                .retrieve()
+                .bodyToMono(InventoryResponse[].class)
+                .block();
     }
 
 }
