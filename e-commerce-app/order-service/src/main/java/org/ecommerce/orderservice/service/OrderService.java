@@ -44,9 +44,9 @@ public class OrderService {
             // Check if all items are in stock
             List<String> skuCodes = orderItems.stream()
                     .map(OrderItem::getSkuCode)
-                    .toList();
-            List<InventoryResponse> inventoryResponses = inventoryClient.isInStock(skuCodes);
-            boolean allProductsInStock = inventoryResponses.stream()
+                    .toList();  // Get all sku codes
+            InventoryResponse[] inventoryResponses = inventoryClient.isInStock(skuCodes);
+            boolean allProductsInStock = Arrays.stream(inventoryResponses)
                     .allMatch(InventoryResponse::getIsInStock);
 
             // Save order

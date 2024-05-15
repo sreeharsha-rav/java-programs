@@ -1,17 +1,28 @@
 package org.ecommerce.orderservice.client;
 
+import lombok.RequiredArgsConstructor;
 import org.ecommerce.orderservice.dto.InventoryResponse;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
-@FeignClient(name = "inventory-service")
-public interface InventoryClient {
+/*
+ * This class is used to make requests to the inventory-service using the WebClient.
+ * isInstock: Used to check if the products are in stock.
+ */
+@RequiredArgsConstructor
+public class InventoryClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "api/inventory")
-    List<InventoryResponse> isInStock(@RequestParam List<String> skuCodes);
+    private final WebClient webClient;
+
+    public InventoryResponse[] isInStock(List<String> skuCodes) {
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder.path("api/inventory")
+                        .queryParam("skuCodes", skuCodes)
+                        .build())
+                .retrieve()
+                .bodyToMono(InventoryResponse[].class)
+                .block();
+    }
 
 }
