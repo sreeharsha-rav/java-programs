@@ -5,16 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class OrderResponse {
-    private Long orderId;
-    private String orderNumber;
-    private List<OrderItemDto> orderItems;
-    private Date orderDate;
+public class OrderItemDto {
+    private Long id;
+    private String skuCode;
+    private BigDecimal price;
+    private int quantity;
 }

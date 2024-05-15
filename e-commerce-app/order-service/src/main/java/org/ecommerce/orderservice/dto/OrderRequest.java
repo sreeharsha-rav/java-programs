@@ -1,7 +1,14 @@
 package org.ecommerce.orderservice.dto;
 
-public record OrderRequest(
-        String skuCode,
-        double price,
-        int quantity) {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class OrderRequest {
+    List<OrderItemDto> orderItems;
 }

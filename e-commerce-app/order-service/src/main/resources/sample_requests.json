@@ -1,0 +1,72 @@
+[
+  {
+    "orderItems": [
+      {
+        "skuCode": "SKU-001",
+        "price": 19.99,
+        "quantity": 2
+      },
+      {
+        "skuCode": "SKU-002",
+        "price": 29.99,
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "orderItems": [
+      {
+        "skuCode": "SKU-003",
+        "price": 49.99,
+        "quantity": 1
+      },
+      {
+        "skuCode": "SKU-004",
+        "price": 15.99,
+        "quantity": 3
+      }
+    ]
+  },
+  {
+    "orderItems": [
+      {
+        "skuCode": "SKU-005",
+        "price": 39.99,
+        "quantity": 2
+      },
+      {
+        "skuCode": "SKU-006",
+        "price": 24.99,
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "orderItems": [
+      {
+        "skuCode": "SKU-007",
+        "price": 99.99,
+        "quantity": 1
+      },
+      {
+        "skuCode": "SKU-008",
+        "price": 49.99,
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "orderItems": [
+      {
+        "skuCode": "SKU-009",
+        "price": 14.99,
+        "quantity": 3
+      },
+      {
+        "skuCode": "SKU-010",
+        "price": 34.99,
+        "quantity": 2
+      }
+    ]
+  }
+]
