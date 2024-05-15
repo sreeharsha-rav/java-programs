@@ -7,6 +7,7 @@ import org.ecommerce.orderservice.dto.OrderResponse;
 import org.ecommerce.orderservice.model.Order;
 import org.ecommerce.orderservice.repository.OrderRepository;
 import org.springframework.stereotype.Service;
+import org.ecommerce.orderservice.client.InventoryClient;
 
 import java.util.Date;
 import java.util.Optional;
@@ -20,8 +21,18 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
+    private final InventoryClient inventoryClient;
+
     public OrderResponse createOrder(OrderRequest orderRequest) {
         try {
+            // Check if item is in stock
+            Boolean inStock = inventoryClient.isInStock(orderRequest.skuCode(), orderRequest.quantity());
+
+            if (!inStock) {
+                log.error("Item not in stock: {}", orderRequest.skuCode());
+                return null;
+            }
+
             // Map request to order
             Order order = Order.builder()
                     .orderNumber(UUID.randomUUID().toString())
