@@ -24,7 +24,7 @@ public class Order {
     @Column(name = "order_number")
     private String orderNumber;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems;
 
     @Column(name = "order_date", columnDefinition = "TIMESTAMP")

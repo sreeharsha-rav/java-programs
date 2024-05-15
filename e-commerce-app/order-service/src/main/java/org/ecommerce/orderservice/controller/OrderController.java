@@ -2,12 +2,9 @@ package org.ecommerce.orderservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.ecommerce.orderservice.dto.OrderRequest;
-import org.ecommerce.orderservice.dto.OrderResponse;
 import org.ecommerce.orderservice.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/orders")

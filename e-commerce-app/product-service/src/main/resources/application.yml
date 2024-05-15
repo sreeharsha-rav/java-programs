@@ -7,8 +7,9 @@ spring:
             port: 27017
             database: ecommerce_db
 
+# Define the port as 0 to allow Spring Boot to choose a random port and allow multiple instances of the service to run on the same machine.
 server:
-    port: 8010
+    port: 0
 
 eureka:
     client:
