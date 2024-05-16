@@ -1,6 +1,5 @@
 package org.ecommerce.orderservice.config;
 
-import org.ecommerce.orderservice.client.InventoryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

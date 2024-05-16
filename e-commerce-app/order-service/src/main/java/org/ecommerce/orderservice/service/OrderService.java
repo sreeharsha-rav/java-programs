@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.ecommerce.orderservice.dto.InventoryResponse;
 import org.ecommerce.orderservice.dto.OrderItemDto;
 import org.ecommerce.orderservice.dto.OrderRequest;
+import org.ecommerce.orderservice.dto.OrderResponse;
 import org.ecommerce.orderservice.model.Order;
 import org.ecommerce.orderservice.model.OrderItem;
 import org.ecommerce.orderservice.repository.OrderRepository;
@@ -30,7 +31,7 @@ public class OrderService {
         try {
             // Create new order
             Order order = new Order();
-            order.setOrderNumber(UUID.randomUUID().toString()); // Random order number
+            order.setOrderNumber(UUID.randomUUID().toString()); // Random order number, future: use sequence generator
             order.setOrderDate(new Date()); // Current date
 
             // Map Order Request to OrderItems
@@ -83,6 +84,35 @@ public class OrderService {
                 .retrieve()
                 .bodyToMono(InventoryResponse[].class)
                 .block();
+    }
+
+    public List<OrderResponse> getAllOrders() {
+        return orderRepository.findAll()
+                .stream()
+                .map(this::mapToOrderResponse)
+                .toList();
+    }
+
+    private OrderResponse mapToOrderResponse(Order order) {
+        OrderResponse orderResponse = new OrderResponse();
+        orderResponse.setOrderId(order.getId());
+        orderResponse.setOrderNumber(order.getOrderNumber());
+        orderResponse.setOrderDate(order.getOrderDate());
+        orderResponse.setOrderItems(order.getOrderItems()
+                .stream()
+                .map(this::mapToOrderItemDto)
+                .toList());
+
+        return orderResponse;
+    }
+
+    private OrderItemDto mapToOrderItemDto(OrderItem orderItem) {
+        return OrderItemDto.builder()
+                .id(orderItem.getId())
+                .skuCode(orderItem.getSkuCode())
+                .price(orderItem.getPrice())
+                .quantity(orderItem.getQuantity())
+                .build();
     }
 
 }
