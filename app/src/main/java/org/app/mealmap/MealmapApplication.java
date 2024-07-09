@@ -1,4 +1,4 @@
-package org.mealmap.app;
+package org.app.mealmap;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springframework.boot.SpringApplication;
@@ -14,10 +14,10 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 				description = "API for MealMap Application"
 		)
 )
-public class AppApplication {
+public class MealmapApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AppApplication.class, args);
+		SpringApplication.run(MealmapApplication.class, args);
 	}
 
 }

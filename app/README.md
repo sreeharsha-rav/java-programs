@@ -7,9 +7,9 @@ MealMap is a recipe discovery app designed to help you find delicious recipes ba
 
 Current development roadmap:
 - [x] Setup the project structure
-- [x] Implement user authentication
-- [x] Add recipe search and filtering
-- [x] Create meal plans
+- [] Implement user authentication
+- [] Add recipe search and filtering
+- [] Create meal plans
 
 ## Description
 
@@ -50,10 +50,9 @@ MealMap allows users to search, filter, and discover a wide variety of recipes. 
 |-----------------|---------------------|------------------------------|
 | id              | String              | Unique identifier            |
 | name            | String              | Name of the recipe           |
-| ingredients     | Array of Strings    | List of ingredients          |
+| imageUrl        | String              | URL of the recipe image      |
+| ingredients     | Array of Objects    | List of ingredients          |
 | instructions    | String              | Step-by-step instructions    |
-| cuisine         | String              | Cuisine type                 |
-| dietaryPreferences | Array of Strings | Dietary preferences (e.g., vegan, gluten-free) |
 
 ### Meal Plan
 
@@ -111,3 +110,12 @@ Access the API at http://localhost:3000.
 ## API Usage Examples
 
 View all the api usage examples and test cases here: [Postman](https://www.postman.com/sreeharsha-rav/workspace/typescript-apps/collection/28103794-5532ef74-0ec3-4a93-ac67-86f9a03cfc4e?action=share&creator=28103794).
+
+## Future Enhancements
+
+[] Add further details to the Recipe model, such as cooking time and difficulty level
+[] Add search and filtering functionality for recipes
+[] Implement AI-based recipe recommendations based on user preferences
+[] Integrate with third-party APIs for additional recipe data
+[] Add ratings and reviews for recipes
+[] Implement meal plan sharing and collaboration features

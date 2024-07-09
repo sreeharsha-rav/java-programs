@@ -1,7 +1,8 @@
-package org.mealmap.app.recipes.controller;
+package org.app.mealmap.recipes.controller;
 
-import org.mealmap.app.recipes.model.Recipe;
-import org.mealmap.app.recipes.service.RecipeService;
+import jakarta.validation.Valid;
+import org.app.mealmap.recipes.model.Recipe;
+import org.app.mealmap.recipes.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,22 +36,25 @@ public class RecipeController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Mono<ResponseEntity<Recipe>> getRecipeById(@PathVariable Long id) {
-        return recipeService.getRecipeById(id)
-                .map(recipe -> ResponseEntity.ok(recipe))
+        Mono<Recipe> recipe = recipeService.getRecipeById(id);
+        return recipe.map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Recipe> createRecipe(@RequestBody Recipe recipe) {
-        return recipeService.createRecipe(recipe);
+    public Mono<Recipe> createRecipe(@Valid @RequestBody Recipe recipe) {
+        return recipeService.createRecipe(recipe)
+                .onErrorResume(error -> {
+                    return Mono.error(new Exception("Error occurred while creating recipe"));
+                });
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Mono<ResponseEntity<Recipe>> updateRecipe(@PathVariable Long id, @RequestBody Recipe recipe) {
-        return recipeService.updateRecipe(id, recipe)
-                .map(updatedRecipe -> ResponseEntity.ok(updatedRecipe))
+    public Mono<ResponseEntity<Recipe>> updateRecipe(@PathVariable Long id, @Valid @RequestBody Recipe recipe) {
+        Mono<Recipe> updatedRecipe = recipeService.updateRecipe(id, recipe);
+        return updatedRecipe.map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
@@ -59,7 +63,10 @@ public class RecipeController {
     public Mono<ResponseEntity<Void>> deleteRecipe(@PathVariable Long id) {
         return recipeService.deleteRecipe(id)
                 .then(Mono.just(ResponseEntity.noContent().<Void>build()))
-                .defaultIfEmpty(ResponseEntity.notFound().build());
+                .defaultIfEmpty(ResponseEntity.notFound().build())
+                .onErrorResume(error -> {
+                    return Mono.error(new Exception("Error occurred while deleting recipe"));
+                });
     }
 
 }

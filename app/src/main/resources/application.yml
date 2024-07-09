@@ -2,9 +2,9 @@ spring:
     application:
         name: MealMap
     r2dbc:
-        url: r2dbc:h2:mem:///mealmap
-        username: sa
-        password: password
+        url: r2dbc:postgresql://localhost:5432/mealmap
+        username: postgres
+        password: postgres
 
 # spring doc
 springdoc:
@@ -15,4 +15,4 @@ springdoc:
 
 # server port
 server:
-    port: 8080
+    port: 3000

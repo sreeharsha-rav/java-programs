@@ -8,11 +8,17 @@
 		<version>3.3.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>org.mealmap</groupId>
-	<artifactId>app</artifactId>
+	<groupId>org.app</groupId>
+	<artifactId>mealmap</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>app</name>
-	<description>app</description>
+	<name>meal-map-api</name>
+	<description>
+		MealMap is a recipe discovery app designed to
+		help you find delicious recipes based on your preferences and ingredients.
+		It is built with Spring Boot, Reactive, R2dbc, PostgreSQL, H2, Swagger.
+	</description>
+
+
 	<url/>
 	<licenses>
 		<license/>
@@ -87,6 +93,23 @@
 		<dependency>
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

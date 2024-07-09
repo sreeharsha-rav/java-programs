@@ -1,4 +1,4 @@
-package org.mealmap.app.recipes.model;
+package org.app.mealmap.recipes.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,11 +13,13 @@ import org.springframework.data.relational.core.mapping.Table;
  * name: the name of the recipe.
  * description: a short description of the recipe.
  * imageUrl: the URL of the image of the recipe.
+ * ingredients: an array of ingredients required for the recipe.
+ * instructions: the cooking instructions for the recipe.
  */
-@Table("recipes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table("recipes")
 public class Recipe {
 
     @Id
@@ -32,4 +34,17 @@ public class Recipe {
 
     @Column("imageUrl")
     private String imageUrl;
+
+    @Column("ingredients")
+    private String ingredients;   // FUTURE: Change to array of Ingredient objects
+
+    @Column("instructions")
+    private String instructions;    // FUTURE: Change to array of strings
+
+    /* FUTURE: Add more fields for recipe details:
+            cooking time,
+            serving size,
+            diet type,
+            cuisine etc.
+     */
 }

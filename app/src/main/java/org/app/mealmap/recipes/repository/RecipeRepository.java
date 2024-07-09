@@ -1,6 +1,6 @@
-package org.mealmap.app.recipes.repository;
+package org.app.mealmap.recipes.repository;
 
-import org.mealmap.app.recipes.model.Recipe;
+import org.app.mealmap.recipes.model.Recipe;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 
