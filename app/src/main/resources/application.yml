@@ -1,0 +1,12 @@
+# Application Properties
+spring:
+    application:
+        name: MealMap
+    r2dbc:
+        url: r2dbc:h2:mem:///mealmap
+        username: sa
+        password: password
+
+
+server:
+    port: 3000

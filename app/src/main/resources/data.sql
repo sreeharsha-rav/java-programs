@@ -1,0 +1,16 @@
+INSERT INTO recipes (name, description, imageUrl) VALUES
+('Spaghetti Bolognese',
+ 'A classic Italian dish with a meaty, tomato sauce.',
+ 'http://example.com/images/spaghetti-bolognese.jpg'),
+('Chicken Tikka Masala',
+ 'A popular Indian dish made with roasted chicken chunks in a spicy sauce.',
+ 'http://example.com/images/chicken-tikka-masala.jpg'),
+('Beef Tacos',
+ 'A traditional Mexican dish consisting of a corn or wheat tortilla folded or rolled around a filling.',
+ 'http://example.com/images/beef-tacos.jpg'),
+('Sushi',
+ 'A traditional Japanese dish of prepared vinegared rice, usually with some sugar and salt, accompanying a variety of ingredients.',
+ 'http://example.com/images/sushi.jpg'),
+('Cheeseburger',
+ 'A classic American dish consisting of one or more cooked patties of ground meat, usually beef, placed inside a sliced bread roll or bun.',
+ 'http://example.com/images/cheeseburger.jpg');
