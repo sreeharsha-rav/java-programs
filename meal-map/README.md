@@ -1,35 +1,15 @@
 # MealMap
 
-[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/sreeharsha-rav/typescript-projects/tree/mealmap)
-[![Latest Update](https://img.shields.io/badge/latest%20update-July%202024-blue.svg)]()
-
-MealMap is a recipe discovery app designed to help you find delicious recipes based on your preferences and ingredients.
-
-Current development roadmap:
-- [x] Setup the project structure
-- [] Implement user authentication
-- [] Add recipe search and filtering
-- [] Create meal plans
+MealMap is a recipe platform to create, discover, and share recipes. The app allows users to search for recipes, save their favorite recipes, and create a personalized meal plan. 
+The app leverages Spring Webflux on the backend to provide a reactive and scalable API.
 
 ## Description
 
-MealMap allows users to search, filter, and discover a wide variety of recipes. Users can also save their favorite recipes and create a personalized meal plan. The app leverages Fastify for the backend, Prisma as the ORM, and MongoDB for data storage, with TypeScript ensuring robust and maintainable code.
+MealMap allows users to search, filter, and discover a wide variety of recipes. Users can also save their favorite recipes and create a personalized meal plan. 
+The app leverages Spring Webflux on the backend to provide a reactive and scalable API.
 
-## Features
-
-- Search for recipes by ingredients, cuisine, and dietary preferences
-- Save and manage favorite recipes
-- Create and customize meal plans
-- User authentication and profile management
-- Responsive design for a seamless experience across devices
-
-## Technologies
-
-- **Frontend:** Next.js, TypeScript, Tailwind CSS
-- **Backend:** Spring Boot, Spring Webflux, Java, Fastify
+- **Backend:** Spring Boot, Spring Webflux, Java
 - **Database:** PostgreSQL, MongoDB
-- **ORM:** Prisma, Mongoose
-- **Others:** Docker, Git, Jenkins, AWS
 
 ## Data Model
 
@@ -93,28 +73,3 @@ MealMap allows users to search, filter, and discover a wide variety of recipes. 
 | POST   | /api/mealplans        | Create a new meal plan |
 | PUT    | /api/mealplans/:id    | Update a meal plan     |
 | DELETE | /api/mealplans/:id    | Delete a meal plan     |
-
-## Installation
-
-### Setup
-
-
-### Testing
-
-
-### Docker
-
-Access the API at http://localhost:3000.
-
-## API Usage Examples
-
-View all the api usage examples and test cases here: [Postman](https://www.postman.com/sreeharsha-rav/workspace/typescript-apps/collection/28103794-5532ef74-0ec3-4a93-ac67-86f9a03cfc4e?action=share&creator=28103794).
-
-## Future Enhancements
-
-[] Add further details to the Recipe model, such as cooking time and difficulty level
-[] Add search and filtering functionality for recipes
-[] Implement AI-based recipe recommendations based on user preferences
-[] Integrate with third-party APIs for additional recipe data
-[] Add ratings and reviews for recipes
-[] Implement meal plan sharing and collaboration features

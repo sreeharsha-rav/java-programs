@@ -36,4 +36,6 @@ public class User {
     @Column("favorite_recipes")
     private List<String> favoriteRecipes;
 
+    @Column("meal_plan_ids")
+    private List<Integer> mealPlanIds;
 }

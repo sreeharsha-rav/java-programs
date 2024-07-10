@@ -1,7 +1,6 @@
 package org.app.mealmap.service;
 
 import org.app.mealmap.dto.MealPlanDto;
-import org.app.mealmap.dto.MealPlanRequest;
 import org.app.mealmap.dto.UserDto;
 import org.app.mealmap.repository.MealPlanRepository;
 import org.app.mealmap.utils.MealPlanMapper;
