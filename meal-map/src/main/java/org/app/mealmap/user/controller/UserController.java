@@ -1,37 +1,23 @@
 package org.app.mealmap.user.controller;
 
+import org.app.mealmap.user.dto.UserDto;
 import org.app.mealmap.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public String getUser() {
-        return "Hello, user!";
-    }
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String createUser() {
-        return "User created!";
+    public Mono<UserDto> createUser(@RequestBody Mono<UserDto> userDtoMono) {
+        return userService.createUser(userDtoMono);
     }
 
-    @PutMapping
-    @ResponseStatus(HttpStatus.OK)
-    public String updateUser() {
-        return "User updated!";
-    }
-
-    @DeleteMapping
-    @ResponseStatus(HttpStatus.OK)
-    public String deleteUser() {
-        return "User deleted!";
-    }
 }

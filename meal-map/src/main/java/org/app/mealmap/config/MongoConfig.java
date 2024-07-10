@@ -7,6 +7,7 @@ import org.app.mealmap.user.Model.User;
 import org.app.mealmap.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 
@@ -21,14 +22,15 @@ public class MongoConfig implements CommandLineRunner {
     private RecipeRepository recipeRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
-    public void run(String... args) throws Exception {
-        initUserData();
+    public void run(String... args) {
         initRecipeData();
     }
 
-    public List<Recipe> data() {
+    public List<Recipe> recipeData() {
         return Arrays.asList(
                 Recipe.builder()
                         .name("Pasta")
@@ -54,22 +56,34 @@ public class MongoConfig implements CommandLineRunner {
         );
     }
 
+    public List<User> userData() {
+        return Arrays.asList(
+                User.builder()
+                        .username("user")
+                        .password(passwordEncoder.encode("password"))
+                        .favoriteRecipes(new String[]{"1", "2"})
+                        .build(),
+                User.builder()
+                        .username("admin")
+                        .password(passwordEncoder.encode("password"))
+                        .favoriteRecipes(new String[]{"2", "3"})
+                        .build()
+        );
+    }
+
     private void initRecipeData() {
         recipeRepository.deleteAll()
-                .thenMany(Flux.fromIterable(data()))
+                .thenMany(Flux.fromIterable(recipeData()))
                 .flatMap(recipeRepository::save)
                 .thenMany(recipeRepository.findAll())
                 .subscribe(recipe -> log.info("Recipe inserted: " + recipe.getName()));
     }
 
     private void initUserData() {
+        // insert user data into the database
         userRepository.deleteAll()
-                .thenMany(userRepository.saveAll(Arrays.asList(
-                        User.builder()
-                                .username("user1")
-                                .password("password1")
-                                .build())
-                ))
+                .thenMany(Flux.fromIterable(userData()))
+                .flatMap(userRepository::save)
                 .thenMany(userRepository.findAll())
                 .subscribe(user -> log.info("User inserted: " + user.getUsername()));
     }

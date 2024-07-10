@@ -1,0 +1,19 @@
+spring:
+    application:
+        name: MealMap
+    data:
+        mongodb:
+            host: localhost
+            port: 27017
+            database: meal_map
+
+# spring doc
+springdoc:
+    api-docs:
+        path: /v3/api-docs
+    swagger-ui:
+        path: /swagger-ui.html
+
+# server port
+server:
+    port: 8080

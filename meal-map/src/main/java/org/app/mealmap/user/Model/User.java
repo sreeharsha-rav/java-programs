@@ -1,7 +1,5 @@
 package org.app.mealmap.user.Model;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document("users")
+@Document(collection = "users")
 public class User {
 
     @Id
@@ -31,4 +29,5 @@ public class User {
     private String password;
 
     private String[] favoriteRecipes;
+
 }
