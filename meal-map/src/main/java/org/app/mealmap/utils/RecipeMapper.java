@@ -1,7 +1,7 @@
-package org.app.mealmap.recipes.utils;
+package org.app.mealmap.utils;
 
-import org.app.mealmap.recipes.dto.RecipeDto;
-import org.app.mealmap.recipes.model.Recipe;
+import org.app.mealmap.dto.RecipeDto;
+import org.app.mealmap.model.Recipe;
 import org.springframework.beans.BeanUtils;
 
 /*

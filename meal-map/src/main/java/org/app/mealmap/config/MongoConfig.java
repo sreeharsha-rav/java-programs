@@ -1,29 +1,25 @@
 package org.app.mealmap.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.app.mealmap.recipes.model.Recipe;
-import org.app.mealmap.recipes.repository.RecipeRepository;
-import org.app.mealmap.user.Model.User;
-import org.app.mealmap.user.repository.UserRepository;
+import org.app.mealmap.model.Recipe;
+import org.app.mealmap.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 
 import java.util.Arrays;
 import java.util.List;
 
+/*
+ * This class initializes the MongoDB database with recipe data.
+ */
 @Component
 @Slf4j
 public class MongoConfig implements CommandLineRunner {
 
     @Autowired
     private RecipeRepository recipeRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) {
@@ -56,36 +52,12 @@ public class MongoConfig implements CommandLineRunner {
         );
     }
 
-    public List<User> userData() {
-        return Arrays.asList(
-                User.builder()
-                        .username("user")
-                        .password(passwordEncoder.encode("password"))
-                        .favoriteRecipes(new String[]{"1", "2"})
-                        .build(),
-                User.builder()
-                        .username("admin")
-                        .password(passwordEncoder.encode("password"))
-                        .favoriteRecipes(new String[]{"2", "3"})
-                        .build()
-        );
-    }
-
     private void initRecipeData() {
         recipeRepository.deleteAll()
                 .thenMany(Flux.fromIterable(recipeData()))
                 .flatMap(recipeRepository::save)
                 .thenMany(recipeRepository.findAll())
                 .subscribe(recipe -> log.info("Recipe inserted: " + recipe.getName()));
-    }
-
-    private void initUserData() {
-        // insert user data into the database
-        userRepository.deleteAll()
-                .thenMany(Flux.fromIterable(userData()))
-                .flatMap(userRepository::save)
-                .thenMany(userRepository.findAll())
-                .subscribe(user -> log.info("User inserted: " + user.getUsername()));
     }
 
 }

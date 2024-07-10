@@ -1,4 +1,4 @@
-package org.app.mealmap.recipes.model;
+package org.app.mealmap.model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;

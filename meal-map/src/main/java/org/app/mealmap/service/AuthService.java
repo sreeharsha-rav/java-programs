@@ -1,7 +1,7 @@
-package org.app.mealmap.user.service;
+package org.app.mealmap.service;
 
-import org.app.mealmap.user.dto.AuthRequest;
-import org.app.mealmap.user.dto.AuthResponse;
+import org.app.mealmap.dto.AuthRequest;
+import org.app.mealmap.dto.AuthResponse;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 

@@ -1,6 +1,6 @@
-package org.app.mealmap.user.controller;
+package org.app.mealmap.controller;
 
-import org.app.mealmap.user.service.UserService;
+import org.app.mealmap.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

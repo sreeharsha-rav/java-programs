@@ -1,11 +1,14 @@
-package org.app.mealmap.user.Model;
+package org.app.mealmap.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
+import java.util.List;
 
 /*
  * This class represents a user entity.
@@ -18,16 +21,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "users")
+@Table("users")
 public class User {
 
     @Id
-    private String id;
+    private Integer id;
 
+    @Column("username")
     private String username;
 
+    @Column("password")
     private String password;
 
-    private String[] favoriteRecipes;
+    @Column("favorite_recipes")
+    private List<String> favoriteRecipes;
 
 }

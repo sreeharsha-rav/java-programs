@@ -6,6 +6,15 @@ spring:
             host: localhost
             port: 27017
             database: meal_map
+    r2dbc:
+        url: r2dbc:postgresql://localhost:5432/mealmap
+        name: mealmap
+        username: postgres
+        password: postgres
+
+logging:
+    level:
+      org.springframework.data.r2dbc: DEBUG
 
 # spring doc
 springdoc:

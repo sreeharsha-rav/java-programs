@@ -43,6 +43,7 @@ public class SecurityConfig {
 
     @Bean
     public MapReactiveUserDetailsService userDetailsService() {
+        // Basic in-memory user store
         List<UserDetails> users = Arrays.asList(
                 User.withUsername("user1")
                         .password(passwordEncoder().encode("password1"))

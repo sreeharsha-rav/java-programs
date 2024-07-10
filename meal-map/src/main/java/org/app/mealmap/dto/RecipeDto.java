@@ -1,4 +1,4 @@
-package org.app.mealmap.recipes.dto;
+package org.app.mealmap.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;

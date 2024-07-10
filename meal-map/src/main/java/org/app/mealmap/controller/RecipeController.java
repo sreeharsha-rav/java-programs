@@ -1,8 +1,8 @@
-package org.app.mealmap.recipes.controller;
+package org.app.mealmap.controller;
 
 import jakarta.validation.Valid;
-import org.app.mealmap.recipes.dto.RecipeDto;
-import org.app.mealmap.recipes.service.RecipeService;
+import org.app.mealmap.dto.RecipeDto;
+import org.app.mealmap.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

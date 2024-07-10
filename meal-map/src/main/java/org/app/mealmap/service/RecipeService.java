@@ -1,12 +1,15 @@
-package org.app.mealmap.recipes.service;
+package org.app.mealmap.service;
 
-import org.app.mealmap.recipes.dto.RecipeDto;
-import org.app.mealmap.recipes.repository.RecipeRepository;
-import org.app.mealmap.recipes.utils.RecipeMapper;
+import org.app.mealmap.dto.RecipeDto;
+import org.app.mealmap.model.Recipe;
+import org.app.mealmap.repository.RecipeRepository;
+import org.app.mealmap.utils.RecipeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 /*
  * This class provides the business logic for managing recipes.
@@ -51,8 +54,7 @@ public class RecipeService {
     }
 
     public Mono<Void> deleteRecipe(String id) {
-        return recipeRepository.deleteById(id)
-                .switchIfEmpty(Mono.error(new RuntimeException("Recipe not deleted")));
+        return recipeRepository.deleteById(id);
     }
 
 }
