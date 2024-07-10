@@ -20,3 +20,7 @@ The following projects are included in this repository:
 - [Quiz App](./quiz-app) : A spring boot application that demonstrates a simple quiz functionality. It includes two versions: Monolithic and Microservices.
     - [Quiz Monolithic](./quiz-app/quiz-monolithic-demo/README.md) : A spring boot application that demonstrates a monolithic version of the Quiz app.
     - [Quiz Microservices](./quiz-app/quiz-microservice-demo/README.md) : A spring boot application that demonstrates a microservice version of the Quiz app.
+
+### Spring WebFlux
+
+- [MealMap](./meal-map/README.md) : A Spring WebFlux application that demonstrates a simple meal mapping service. It includes implementations for CRUD operations on model Recipe and Meal.
