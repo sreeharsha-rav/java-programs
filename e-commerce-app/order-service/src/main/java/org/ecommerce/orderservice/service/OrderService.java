@@ -2,103 +2,117 @@ package org.ecommerce.orderservice.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.ecommerce.orderservice.dto.InventoryResponse;
+import org.ecommerce.orderservice.dto.OrderItemDto;
 import org.ecommerce.orderservice.dto.OrderRequest;
 import org.ecommerce.orderservice.dto.OrderResponse;
 import org.ecommerce.orderservice.model.Order;
+import org.ecommerce.orderservice.model.OrderItem;
 import org.ecommerce.orderservice.repository.OrderRepository;
 import org.springframework.stereotype.Service;
-import org.ecommerce.orderservice.client.InventoryClient;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Arrays;
 import java.util.Date;
-import java.util.Optional;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class OrderService {
 
     private final OrderRepository orderRepository;
+    private final WebClient.Builder webClientBuilder;
 
-    private final InventoryClient inventoryClient;
-
-    public OrderResponse createOrder(OrderRequest orderRequest) {
+    public void placeOrder(OrderRequest orderRequest) {
         try {
-            // Check if item is in stock
-            Boolean inStock = inventoryClient.isInStock(orderRequest.skuCode(), orderRequest.quantity());
+            // Create new order
+            Order order = new Order();
+            order.setOrderNumber(UUID.randomUUID().toString()); // Random order number, future: use sequence generator
+            order.setOrderDate(new Date()); // Current date
 
-            if (!inStock) {
-                log.error("Item not in stock: {}", orderRequest.skuCode());
-                return null;
-            }
+            // Map Order Request to OrderItems
+            List<OrderItem> orderItems = orderRequest.getOrderItems()
+                    .stream()
+                    .map(orderItemDto -> mapToOrderItem(orderItemDto, order))
+                    .toList();
+            order.setOrderItems(orderItems);    // Set order items
 
-            // Map request to order
-            Order order = Order.builder()
-                    .orderNumber(UUID.randomUUID().toString())
-                    .skuCode(orderRequest.skuCode())
-                    .orderDate(new Date())
-                    .price(orderRequest.price())
-                    .quantity(orderRequest.quantity())
-                    .build();
+            // Check if all items are in stock
+            List<String> skuCodes = orderItems.stream()
+                    .map(OrderItem::getSkuCode)
+                    .toList();  // Get all sku codes
+            InventoryResponse[] inventoryResponses = checkInventoryisInStock(skuCodes);
+            boolean allProductsInStock = Arrays.stream(inventoryResponses)
+                    .allMatch(InventoryResponse::getIsInStock);
 
             // Save order
-            Order savedOrder = orderRepository.save(order);
-            log.info("Order created successfully: {}", savedOrder);
-
-            // Return response
-            return new OrderResponse(
-                    savedOrder.getId(),
-                    savedOrder.getOrderNumber(),
-                    savedOrder.getSkuCode(),
-                    savedOrder.getPrice(),
-                    savedOrder.getQuantity(),
-                    savedOrder.getOrderDate().toString());
+            if (allProductsInStock) {
+                orderRepository.save(order);
+                log.info("Order created successfully: {}", order.getOrderNumber());
+            } else {
+                log.error("Order creation failed. Some products are out of stock.");
+                throw new RuntimeException("Order creation failed. Some products are out of stock.");
+            }
 
         } catch (Exception e) {
             log.error("Error occurred while creating order: {}", e.getMessage());
-            return null;
+            throw new RuntimeException("Error occurred while creating order");
         }
     }
 
-    public OrderResponse getOrderByID(Long id) {
-        Optional<Order> orderOptional = orderRepository.findById(id);
-        if (orderOptional.isEmpty()) {
-            log.error("Order not found: {}", id);
-            return null;
-        }
+    private OrderItem mapToOrderItem(OrderItemDto orderItemDto, Order order) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setOrder(order);
+        orderItem.setSkuCode(orderItemDto.getSkuCode());
+        orderItem.setPrice(orderItemDto.getPrice());
+        orderItem.setQuantity(orderItemDto.getQuantity());
 
-        return new OrderResponse(
-                orderOptional.get().getId(),
-                orderOptional.get().getOrderNumber(),
-                orderOptional.get().getSkuCode(),
-                orderOptional.get().getPrice(),
-                orderOptional.get().getQuantity(),
-                orderOptional.get().getOrderDate().toString());
+        return orderItem;
+    }
+
+    private InventoryResponse[] checkInventoryisInStock(List<String> skuCodes) {
+        return webClientBuilder.build()
+                .get()
+                .uri("http://inventory-service/api/inventory",
+                        uriBuilder -> uriBuilder
+                            .queryParam("skuCodes", skuCodes)
+                            .build())
+                .retrieve()
+                .bodyToMono(InventoryResponse[].class)
+                .block();
     }
 
     public List<OrderResponse> getAllOrders() {
-        List<Order> orders = orderRepository.findAll();
-
-        return orders.stream()
-                .map(order -> new OrderResponse(
-                        order.getId(),
-                        order.getOrderNumber(),
-                        order.getSkuCode(),
-                        order.getPrice(),
-                        order.getQuantity(),
-                        order.getOrderDate().toString()))
+        return orderRepository.findAll()
+                .stream()
+                .map(this::mapToOrderResponse)
                 .toList();
     }
 
-    public void deleteOrder(Long id) {
-        Optional<Order> order = orderRepository.findById(id);
-        if (order.isPresent()) {
-            orderRepository.delete(order.get());
-            log.info("Order deleted successfully: {}", order.get());
-        } else {
-            log.error("Order not found: {}", id);
-        }
+    private OrderResponse mapToOrderResponse(Order order) {
+        OrderResponse orderResponse = new OrderResponse();
+        orderResponse.setOrderId(order.getId());
+        orderResponse.setOrderNumber(order.getOrderNumber());
+        orderResponse.setOrderDate(order.getOrderDate());
+        orderResponse.setOrderItems(order.getOrderItems()
+                .stream()
+                .map(this::mapToOrderItemDto)
+                .toList());
+
+        return orderResponse;
+    }
+
+    private OrderItemDto mapToOrderItemDto(OrderItem orderItem) {
+        return OrderItemDto.builder()
+                .id(orderItem.getId())
+                .skuCode(orderItem.getSkuCode())
+                .price(orderItem.getPrice())
+                .quantity(orderItem.getQuantity())
+                .build();
     }
 
 }

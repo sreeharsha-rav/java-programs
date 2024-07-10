@@ -1,0 +1,28 @@
+spring:
+    application:
+        name: MealMap
+    data:
+        mongodb:
+            host: localhost
+            port: 27017
+            database: meal_map
+    r2dbc:
+        url: r2dbc:postgresql://localhost:5432/mealmap
+        name: mealmap
+        username: postgres
+        password: postgres
+
+logging:
+    level:
+      org.springframework.data.r2dbc: DEBUG
+
+# spring doc
+springdoc:
+    api-docs:
+        path: /v3/api-docs
+    swagger-ui:
+        path: /swagger-ui.html
+
+# server port
+server:
+    port: 8080

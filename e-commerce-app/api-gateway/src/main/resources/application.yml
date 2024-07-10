@@ -1,3 +1,4 @@
+# API Gateway Configuration
 spring:
     application:
         name: api-gateway
@@ -6,19 +7,70 @@ spring:
             resourceserver:
                 jwt:
                     issuer-uri: http://localhost:8181/realms/e-commerce-app-realm
+    cloud:
+        gateway:
+            discovery:
+                locator:
+                    enabled: true
+                    lower-case-service-id: true
+            routes:
+                # Product Service Route
+                - id: product-service
+                  uri: lb://product-service
+                  predicates:
+                    - Path=/api/products/**
+                # Order Service Route
+                - id: order-service
+                  uri: lb://order-service
+                  predicates:
+                    - Path=/api/orders/**
+                # Inventory Service Route
+                - id: inventory-service
+                  uri: lb://inventory-service
+                  predicates:
+                    - Path=/api/inventory/**
+                # Eureka Server Route
+                - id: eureka-server
+                  uri: http://localhost:8761
+                  predicates:
+                    - Path=/eureka/web
+                  filters:
+                    - SetPath=/
+                # Eureka Server Static Resources Route
+                - id: eureka-server-static
+                  uri: http://localhost:8761
+                  predicates:
+                    - Path=/eureka/**
 
+# Logging Configuration
+logging:
+    level:
+        root: INFO
+        org.springframework.cloud.gateway: TRACE
+        org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator: INFO
+
+# Server Configuration
 server:
     port: 9000
 
+# Eureka Configuration
+eureka:
+    client:
+        service-url:
+            defaultZone: http://eureka:password@localhost:8761/eureka
+        register-with-eureka: true
+        fetch-registry: true
+
+# Springdoc Configuration
 springdoc:
     swagger-ui:
-        path: /swagger-ui/index.html
+        path: /swagger-ui.html
         urls:
             - name: product-service
-              url: /aggregate/product-service/api-docs
+              url: lb://product-service/api-docs
             - name: order-service
-              url: /aggregate/order-service/api-docs
+              url: lb://order-service/api-docs
             - name: inventory-service
-              url: /aggregate/inventory-service/api-docs
+              url: lb://inventory-service/api-docs
     api-docs:
         path: /api-docs

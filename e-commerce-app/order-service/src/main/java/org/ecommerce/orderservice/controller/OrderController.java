@@ -18,26 +18,15 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderResponse createOrder(@RequestBody OrderRequest orderRequest) {
-        return orderService.createOrder(orderRequest);
-    }
-
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public OrderResponse getOrderByID(@PathVariable Long id) {
-        return orderService.getOrderByID(id);
+    public String createOrder(@RequestBody OrderRequest orderRequest) {
+        orderService.placeOrder(orderRequest);
+        return "Order placed successfully";
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<OrderResponse> getAllOrders() {
         return orderService.getAllOrders();
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteOrder(@PathVariable Long id) {
-        orderService.deleteOrder(id);
     }
 
 }

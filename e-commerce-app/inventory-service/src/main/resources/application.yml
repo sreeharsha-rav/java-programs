@@ -11,13 +11,14 @@ spring:
             ddl-auto: update
         show-sql: true
 
+# Define the port as 0 to allow Spring Boot to choose a random port and allow multiple instances of the service to run on the same machine.
 server:
-    port: 8030
+    port: 0
 
 eureka:
     client:
         service-url:
-            defaultZone: http://localhost:8761/eureka/
+            defaultZone: http://eureka:password@localhost:8761/eureka
         register-with-eureka: true
         fetch-registry: true
 

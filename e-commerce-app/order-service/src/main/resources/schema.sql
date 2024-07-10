@@ -1,8 +1,14 @@
 CREATE TABLE IF NOT EXISTS orders (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     order_number VARCHAR(255) NOT NULL,
+    order_date TIMESTAMP NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS order_items (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    order_id BIGINT NOT NULL,
     sku_code VARCHAR(255) NOT NULL,
     quantity INT NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
-    order_date TIMESTAMP NOT NULL
+    price DECIMAL NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id)
 );

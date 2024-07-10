@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,20 +18,14 @@ import java.util.Date;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "order_number")
     private String orderNumber;
 
-    @Column(name = "sku_code")
-    private String skuCode;
-
-    @Column(name = "quantity")
-    private int quantity;
-
-    @Column(name = "price", columnDefinition = "DECIMAL(10,2)") // Limit to 10 digits and 2 decimal points
-    private double price;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> orderItems;
 
     @Column(name = "order_date", columnDefinition = "TIMESTAMP")
     private Date orderDate;

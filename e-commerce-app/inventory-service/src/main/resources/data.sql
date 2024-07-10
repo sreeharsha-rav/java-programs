@@ -1,5 +1,10 @@
-INSERT INTO inventory (sku_code, quantity) VALUES ('SKU001', 100);
-INSERT INTO inventory (sku_code, quantity) VALUES ('SKU002', 200);
-INSERT INTO inventory (sku_code, quantity) VALUES ('SKU003', 300);
-INSERT INTO inventory (sku_code, quantity) VALUES ('SKU004', 400);
-INSERT INTO inventory (sku_code, quantity) VALUES ('SKU005', 500);
+INSERT INTO inventory (sku_code, quantity) VALUES ('SKU-001', 10);
+INSERT INTO inventory (sku_code, quantity) VALUES ('SKU-002', 20);
+INSERT INTO inventory (sku_code, quantity) VALUES ('SKU-003', 30);
+INSERT INTO inventory (sku_code, quantity) VALUES ('SKU-004', 40);
+INSERT INTO inventory (sku_code, quantity) VALUES ('SKU-005', 50);
+INSERT INTO inventory (sku_code, quantity) VALUES ('SKU-006', 60);
+INSERT INTO inventory (sku_code, quantity) VALUES ('SKU-007', 70);
+INSERT INTO inventory (sku_code, quantity) VALUES ('SKU-008', 80);
+INSERT INTO inventory (sku_code, quantity) VALUES ('SKU-009', 90);
+INSERT INTO inventory (sku_code, quantity) VALUES ('SKU-010', 100);
